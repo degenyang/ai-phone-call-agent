@@ -1,0 +1,5 @@
+# VPS bridge + tools (aicall.py itself needs only the standard library)
+websockets==15.0.1
+google-genai==1.65.0
+# audioop was removed from the standard library in Python 3.13
+audioop-lts==0.2.2; python_version >= "3.13"

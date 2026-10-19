@@ -1,0 +1,51 @@
+# /etc/systemd/system/aicall.service
+# Runs the bridge as the unprivileged "aicall" user. Code, venv and .env under /opt/aicall are
+# root-owned; the only writable path is /srv/aicall/calls. Setup steps are in docs/deployment.md
+# ("VPS bridge"). After editing: systemctl daemon-reload && systemctl restart aicall
+[Unit]
+Description=AI phone call bridge (Twilio Media Streams <-> realtime voice model)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=aicall
+Group=aicall
+WorkingDirectory=/opt/aicall
+# read by systemd as root, so .env can stay root:root 0600
+EnvironmentFile=/opt/aicall/.env
+ExecStart=/opt/aicall/venv/bin/python /opt/aicall/server.py
+Restart=always
+RestartSec=3
+# call artifacts 0640: group "aicall" is shared only with the SFTP upload account that fetches results
+UMask=0027
+
+# hardening
+NoNewPrivileges=yes
+ProtectSystem=strict
+ReadWritePaths=/srv/aicall/calls
+ProtectHome=yes
+# the service sees only its own processes in /proc
+ProtectProc=invisible
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+# the bridge only needs memory for the calls it serves
+MemoryMax=1G
+TasksMax=256
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,30 @@
+# call data and secrets never go in git
+# (calls/ is the default AICALL_OUT_DIR; if you point AICALL_OUT_DIR at another folder inside
+#  this repo, add it here too - aicall.py warns when it is not ignored)
+calls/
+samples/
+# working folders from docs/deployment.md (bridge test without a phone call)
+sim/
+clips/
+*.wav
+*.mp3
+*.pcm
+*.log
+.env
+.env.*
+!.env.example
+*_key
+*.key
+*.pem
+secrets/
+.secrets/
+__pycache__/
+venv/
+.venv/
+
+# personal prompts (names, numbers) stay out of git
+prompts.local/
+
+# tooling caches
+.pytest_cache/
+*.pyc

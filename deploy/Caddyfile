@@ -1,0 +1,17 @@
+# /etc/caddy/Caddyfile
+# Caddy terminates TLS (automatic Let's Encrypt on ports 80/443) and proxies the Twilio
+# websocket to server.py on localhost. Replace your-domain.example with a hostname that
+# resolves to your VPS. Only /media/* (the per-call stream URLs) and /healthz reach the
+# bridge; everything else is 404. Use `handle` blocks: a bare `respond 404` next to
+# reverse_proxy would shadow the proxy.
+your-domain.example {
+	handle /media/* {
+		reverse_proxy 127.0.0.1:8765
+	}
+	handle /healthz {
+		reverse_proxy 127.0.0.1:8765
+	}
+	handle {
+		respond 404
+	}
+}

@@ -1,0 +1,19 @@
+{
+ "conv": [
+  [0.9, "agent", "Hi, this is an AI assistant calling from Example Dental Studio. Just so you know, this call may be recorded. May I speak with Alex?"],
+  [6.4, "callee", "Yeah, speaking."],
+  [7.6, "agent", "Great, thanks! I'm calling to confirm your teeth cleaning on Thursday at 3 pm. Does that still work for you?"],
+  [14.2, "callee", "Hmm, could we make it a bit later? Like four?"],
+  [15.3, "agent", "Of course. So you'd prefer Thursday at 4 pm instead. I'll pass that on, and the team will call you back to confirm the new time. Is there anything else?"],
+  [24.8, "callee", "No, that's all. Thanks."],
+  [25.6, "agent", "Thank you, have a great day. Bye!"]
+ ],
+ "events": [
+  [19.1, "interrupted"],
+  [28.3, "end_call"],
+  [30.2, "twilio stop"]
+ ],
+ "secs": 30.4,
+ "model": "gemini-3.1-flash-live-preview",
+ "recorded": true
+}

@@ -1,0 +1,19 @@
+$ python3 aicall.py +12025550100 examples/demo_prompt_en.txt --record
+FROM +12025550123 TO +12025550100 RECORD True
+CALL CA0123456789abcdef0123456789abcdef queued
+12:00:01 queued
+12:00:03 ringing
+12:00:09 in-progress
+12:00:41 completed
+duration 32 price -0.0420 USD
+[0.9s] agent: Hi, this is an AI assistant calling from Example Dental Studio. Just so you know, this call may be recorded. May I speak with Alex?
+[6.4s] callee: Yeah, speaking.
+[7.6s] agent: Great, thanks! I'm calling to confirm your teeth cleaning on Thursday at 3 pm. Does that still work for you?
+[14.2s] callee: Hmm, could we make it a bit later? Like four?
+[15.3s] agent: Of course. So you'd prefer Thursday at 4 pm instead. I'll pass that on, and the team will call you back to confirm the new time. Is there anything else?
+[24.8s] callee: No, that's all. Thanks.
+[25.6s] agent: Thank you, have a great day. Bye!
+events [[19.1, 'interrupted'], [28.3, 'end_call'], [30.2, 'twilio stop']]
+outcome ok - end_call
+REC calls/20261019_120000_3f9c2a71b0de/call.mp3
+DIR calls/20261019_120000_3f9c2a71b0de
